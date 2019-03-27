@@ -10,6 +10,8 @@ function countCollection(collName) {
 function getValueLength(myValue) {
     if (myValue instanceof BinData) {
       return myValue.length();
+	} else if (myValue instanceof Object) {
+	  return Object.bsonsize(myValue);
     } else {
       return myValue.length;
     }
