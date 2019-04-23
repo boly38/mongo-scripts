@@ -10,8 +10,10 @@ function countCollection(collName) {
 function getValueLength(myValue) {
     if (myValue instanceof BinData) {
       return myValue.length();
-	} else if (myValue instanceof Object) {
-	  return Object.bsonsize(myValue);
+    } else if (myValue instanceof ObjectId) {
+      return myValue.str.length;
+    } else if (myValue instanceof Object) {
+      return Object.bsonsize(myValue);
     } else {
       return myValue.length;
     }
@@ -181,8 +183,8 @@ function findMapMinMax(collName, mapField) {
     if (minK == undefined) {
        print(collName + " [" + mapField+ "](k,v) missing");
     } else {
-       print(collName + " [" + mapField+ "](k,v).length - minK: " + minK + "  maxK: " + maxK
-                                                   + " - minV: " + minV + "  maxV: " + maxV);
+       print(collName + " [" + mapField+ "](k,v).length - minK: " + minK + "  maxK: " + maxK +
+                        " - minV: " + minV + "  maxV: " + maxV);
     }
 }
 
