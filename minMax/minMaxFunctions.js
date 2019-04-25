@@ -8,7 +8,9 @@ function countCollection(collName) {
 }
 
 function getValueLength(myValue) {
-    if (myValue instanceof BinData) {
+    if (myValue == null) {
+	  return 0;
+	} else if (myValue instanceof BinData) {
       return myValue.length();
     } else if (myValue instanceof ObjectId) {
       return myValue.str.length;
