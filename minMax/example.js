@@ -1,7 +1,10 @@
-// REQUIREMENT : minMaxFunctions.js
+print('Work on db: mongo-script-test');
+use mongo-script-test;
 
-use mydb;
+print('Load REQUIREMENT : minMaxFunctions.js');
+load('minMax/minMaxFunctions.js');
 
+print(' * reset myuser data')
 db.myuser.drop()
 db.myuser.save({
     "name":"George",
@@ -28,6 +31,8 @@ db.myuser.save({
     "myBinary" : BinData(0,"aGVsbG8gd29ybGQgaGVyZQ==")
 });
 
+
+print(' * start myuser data analysis')
 
 if (countCollection("myuser")) {
     findMinMax("myuser","name");
