@@ -28,18 +28,25 @@ true
 WriteResult({ "nInserted" : 1 })
 WriteResult({ "nInserted" : 1 })
  * start myuser data analysis
-myuser.count 2
+myuser
+myuser.count: 2
 myuser [name].length - min: 3  max: 6
-myuser [info].keys.length - min: 1  max: 2
+myuser [info].keys.length - min:2 max:3
 myuser [info][country].length - min: 2  max: 3
-myuser [tags].keys.length - min: 1  max: 3
-myuser [tags](set).length - min: 2  max: 16
-myuser [comments].length - min: 180  max: 180
+myuser [info.children][].length - min:1 max:3
+myuser [info.children][*][name].length - min:3  max:30
+myuser [tags].keys.length - min:1 max:3
+myuser [tags](keys).length - min:1 max:3
+myuser [tags](k).length - min:2 max:16
+myuser [comments].length - min: 5  max: 180
+myuser [comments][].length - min: 0  max: 2
 myuser [comments][*][text].length - min: 14  max: 24
-myuser [comments][*][userId] missing
-myuser [comments][*][userIDENTITY][name].length - min: 1  max: 14
-myuser [properties].keys.length - min: 2  max: 2
-myuser [properties](k,v).length - minK: 3  maxK: 5 - minV: 1  maxV: 6
+myuser [comments][userId] is missing
+myuser [comments][].length - min:0 max:2
+myuser [comments][*][userIDENTITY.name].length - min:1  max:14
+myuser [properties].keys.length - min:2 max:2
+myuser [properties](keys).length - min:2 max:2
+myuser [properties](k,v).length - minK:3 maxK:5 minV:1 maxV:6
 myuser [myBinary].length - min: 16  max: 16
 bye
 ```
