@@ -1,3 +1,6 @@
+/*global db,use,load */ // provided by mongo shell
+// noinspection JSCheckFunctionSignatures    // remove warns (print with back quotes) "Invalid number of arguments, expected 0"
+
 print('Work on db: mongo-script-test');
 use mongo-script-test;
 
@@ -9,7 +12,10 @@ db.myuser.drop()
 db.myuser.save({
     "name":"George",
     "info": {
-        "country": "fr"
+        "country": "fr",
+        "children": [
+            {"name":"lea"}
+        ]
     },
     "tags": ["oO"],
     "comments": [
@@ -21,30 +27,37 @@ db.myuser.save({
     "name":"Ben",
     "info": {
         "country": "usa",
-        "anotherKey": "valueHere"
+        "anotherKey": "valueHere",
+        "children": [
+            {"name":"joe"},{"name":"jacky"},{"name":"roberto-emilio-santiano-vaskez"}
+        ]
     },
     "tags": ["more","complex","userWithTagsHere"],
     "properties": {
         "foo":"fooVal",
         "babar":"b"
     },
-    "myBinary" : BinData(0,"aGVsbG8gd29ybGQgaGVyZQ==")
+    "myBinary" : BinData(0,"aGVsbG8gd29ybGQgaGVyZQ=="),
+    "comments": []
 });
 
 
 print(' * start myuser data analysis')
 
-if (countCollection("myuser")) {
-    findMinMax("myuser","name");
-    findMinMaxKeys("myuser","info");
-    findSubFieldMinMax("myuser","info","country");
-    findMinMaxKeys("myuser","tags");
-    findSetMinMax("myuser","tags");
-    findMinMax("myuser","comments");
-    findArrayMinMax("myuser","comments","text");
-    findArrayMinMax("myuser","comments","userId");
-    findArraySubItemMinMax("myuser","comments","userIDENTITY","name");
-    findMinMaxKeys("myuser","properties");
-    findMapMinMax("myuser","properties");
-    findMinMax("myuser","myBinary");
+coll="myuser"
+
+if (countCollection(coll)) {
+    findMinMax(coll,"name");
+    findMinMaxKeys(coll,"info");
+    findSubFieldMinMax(coll,"info","country");
+    findSubFieldArrayMinMax(coll,"info","children","name");
+    findMinMaxKeys(coll,"tags");
+    findSetMinMax(coll,"tags");
+    findMinMax(coll,"comments");
+    findArrayMinMax(coll,"comments","text");
+    findArrayMinMax(coll,"comments","userId");
+    findArraySubItemMinMax(coll,"comments","userIDENTITY","name");
+    findMinMaxKeys(coll,"properties");
+    findMapMinMax(coll,"properties");
+    findMinMax(coll,"myBinary");
 }
